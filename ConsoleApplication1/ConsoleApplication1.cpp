@@ -7,7 +7,7 @@ int main()
 {
     Solution s;
     std::cout << s.myAtoi("00000 - 42a12340") << std::endl;
-    std::cout << s.myAtoi(" 123") << std::endl;
+    std::cout << s.myAtoi(" -123") << std::endl;
     std::cout << "Hello World!\n";
 }
 
