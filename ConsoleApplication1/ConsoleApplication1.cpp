@@ -9,6 +9,16 @@ int main()
     std::cout << s.myAtoi("00000 - 42a12340") << std::endl;
     std::cout << s.myAtoi(" -123") << std::endl;
     std::cout << "Hello World!\n";
+    std::cout<<s.myAtoi("9999999999") << std::endl;
+    std::cout<<s.myAtoi("4193 with words") << std::endl;
+    std::cout<<s.myAtoi("3.14159") << std::endl;
+    std::cout<<s.myAtoi("21474836460") << std::endl;
+    std::cout<<s.myAtoi("0100") << std::endl;
+    std::cout<<s.myAtoi("+-12") << std::endl;
+    std::cout<<s.myAtoi("-") << std::endl;
+    std::cout<<s.myAtoi("+1") << std::endl;
+    std::cout<<s.myAtoi("  0000000000012345678") << std::endl; // should be 12345678
+    std::cout<<s.myAtoi("21474836460") << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

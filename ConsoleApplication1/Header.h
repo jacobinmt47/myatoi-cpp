@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 class Solution {
+
 public:;
     int toInt(char c) {
         int ret;
