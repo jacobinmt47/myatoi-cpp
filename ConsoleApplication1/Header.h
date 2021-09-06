@@ -52,9 +52,9 @@ public:;
     }
 
     bool isNumber(char c) {
-        char numbers[] = { '-', '+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',' '};
+        char numbers[] = { '-', '+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
         bool innum = false;
-        for (int i = 0; i < 13; ++i) {
+        for (int i = 0; i < 12; ++i) {
             bool thischar = c == numbers[i];
             innum = innum || thischar;
         }
@@ -84,9 +84,6 @@ public:;
             if (this->isNumber(s[i])) {
                 arr.push_back(s[i]);
                 nextChar++;
-            }
-            else {
-                return 0;
             }
         }
         
