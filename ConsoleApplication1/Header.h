@@ -52,9 +52,9 @@ public:;
     }
 
     bool isNumber(char c) {
-        char numbers[] = { '-', '+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        char numbers[] = { '-', '+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',' '};
         bool innum = false;
-        for (int i = 0; i < 12; ++i) {
+        for (int i = 0; i < 13; ++i) {
             bool thischar = c == numbers[i];
             innum = innum || thischar;
         }
@@ -85,6 +85,9 @@ public:;
                 arr.push_back(s[i]);
                 nextChar++;
             }
+            else {
+                break;
+            }
         }
         
         if (arr[0] == '-') {
@@ -104,18 +107,21 @@ public:;
                 return (signed int)-2147483648;
             }
         }
-        for (long i = 0; i <= (ret.length() - 1); ++i) {
-            long first = toInt(ret[(n - i)]);
-            numarr[i] = (first * powTen);
-            powTen = powTen * 10;
+        if (ret.length() > 0) {
+            for (long i = 0; i <= (ret.length() - 1); ++i) {
+                long first = toInt(ret[(n - i)]);
+                numarr[i] = (first * powTen);
+                powTen = powTen * 10;
+            }
+            int r = this->sum(numarr, ret.length());
+            if (isPositive) {
+                return r;
+            }
+            else {
+                return 0 - r;
+            }
         }
-        int r = this->sum(numarr, ret.length());
-        if (isPositive) {
-            return r;
-        }
-        else {
-            return 0 - r;
-        }
+        return 0;
     }
 
     bool isMax(string st, bool isPositive) {
@@ -145,25 +151,23 @@ public:;
         return ret;
     }
 
-    // remove leading zeros and minus sign
+    // remove leading zeros, minus sign, and spaces
     string delNonNum(string arr, int length) {
         string s;
         for (int i = 0; i < length; i++) {
             char c = arr[i];
-            if ((c != '-') && (c != '+'))
+            if ((c != '-') && (c != '+') &&(c!=' '))
                 s.push_back(c);
         }
         string s2;
-        bool onfront = true;
+        bool onfront =  false;
         for (int i = 0; i < s.length(); ++i) {
             //remove leading zeros
-            if (s[i] == '0'&& onfront) {
-
-            }
-            else {
-                onfront = false;
+            if (s[i] != '0'|| onfront) {
+                onfront = true;
                 s2.push_back(s[i]);
             }
+
         }
         return s2;
     }
