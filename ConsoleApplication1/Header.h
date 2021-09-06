@@ -52,16 +52,31 @@ public:;
     }
 
     bool isNumber(char c) {
-        char numbers[] = { '-', '+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',' '};
+        char numbers[] = { '-', '+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
         bool innum = false;
-        for (int i = 0; i < 13; ++i) {
+        for (int i = 0; i < 12; ++i) {
             bool thischar = c == numbers[i];
             innum = innum || thischar;
         }
         return innum;
     }
+    string trimFrontSpace(string s) {
+        string s2;
+        bool isBack = false;
+        for (size_t i = 0; i < s.length(); i++)
+        {
+            if (s[i] != ' '|| isBack) {
+                s2.push_back(s[i]);
+                isBack = true;
+            }
+        }
+        return s2;
+    }
 
     int myAtoi(string s) {
+        if (s.length() == 0) {
+            return 0;
+        }
         if (s.length() == 1)
             return this->toInt(s[0]);
         string arr;
@@ -71,6 +86,7 @@ public:;
         if (!(this->isNumber(s[0]) || (s[0] == ' '))) {
             return 0;
         }
+        s = this->trimFrontSpace(s);
         for (int i = 0; i < s.length(); ++i) {
             if (s[i] == '.')
                 break;
@@ -86,7 +102,10 @@ public:;
                 nextChar++;
             }
             else {
-                break;
+                if (s[i] == ' ') {
+                    break;
+                }
+                return 0;
             }
         }
         
