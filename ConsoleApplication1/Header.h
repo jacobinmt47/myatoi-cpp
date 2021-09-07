@@ -108,13 +108,7 @@ public:;
                 arr.push_back(s[i]);
                 nextChar++;
             }
-            else {
-                if (s[i] == ' ') {
-                    // need to convert to numbers and sum
-                    break;
-                }
                 break;
-            }
         }
         string ret = arr;
         long n = ret.length() - 1;
