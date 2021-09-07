@@ -15,9 +15,12 @@ int main()
     std::cout<<s.myAtoi("0100") << std::endl;
     std::cout<<s.myAtoi("+-12") << std::endl;
     std::cout<<s.myAtoi("-") << std::endl;
-    std::cout<<s.myAtoi("+1") << std::endl;
+    std::cout<<s.myAtoi("+1") << std::endl;// should be 1
     std::cout<<s.myAtoi("  0000000000012345678") << std::endl; // should be 12345678
     std::cout<<s.myAtoi(" -0012a42") << std::endl;
+    std::cout << s.myAtoi("-000000000000001") << std::endl;
+    std::cout << s.myAtoi("-5-") << std::endl;// should be -5
+    std::cout << s.myAtoi("-13+8") << endl;// should be -13
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

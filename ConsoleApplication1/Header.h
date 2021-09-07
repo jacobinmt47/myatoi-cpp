@@ -79,14 +79,8 @@ public:;
         int numarr[200];
         int nextChar = 0;
         bool isPositive = true;
-        if (!(this->isNumber(s[0]) || (s[0] == ' '))) {
+        if (!(this->isNumber(s[0]))) {
             return 0;
-        }
-        if (s[0] == '-') {
-            isPositive = false;
-        }
-        else {
-            isPositive = true;
         }
         for (size_t i = 0; i < s.length(); i++)
         {
@@ -97,6 +91,27 @@ public:;
                     return 0;
             }
         }
+        if (s[0] == '-') {
+            isPositive = false;
+            string s2;//strip leading minus
+            for (size_t i = 1; i < s.length(); i++)
+            {
+                s2.push_back(s[i]);
+            }
+            s = s2;
+        }
+        else {
+            isPositive = true;
+            if (s[0] == '+') {
+                string s2;//strip leading plus
+                for (size_t i = 1; i < s.length(); i++)
+                {
+                    s2.push_back(s[i]);
+                }
+                s = s2;
+            }
+        }
+       
         s = this->delNonNum(s, s.length());
         if (s.length() == 0) {
             return 0;
@@ -126,14 +141,14 @@ public:;
             else {
                 return (signed int)-2147483648;
             }
-        }
+        }//convert to numbers and add
         if (ret.length() > 0) {
             for (long i = 0; i <= (ret.length() - 1); ++i) {
                 long first = toInt(ret[(n - i)]);
                 numarr[i] = (first * powTen);
                 powTen = powTen * 10;
             }
-            int r = this->sum(numarr, ret.length());
+            long r = this->sum(numarr, ret.length());
             if (isPositive) {
                 return r;
             }
@@ -175,19 +190,30 @@ public:;
     string delNonNum(string arr, int length) {
         string s;
         bool onfront = false;
+        bool rmZero = false;
         for (int i = 0; i <length; ++i) {
             //remove leading zeros
             if (arr[i] != '0' || onfront) {
                 onfront = true;
                 s.push_back(arr[i]);
             }
-
+            else {
+                if (arr[i] == '0') {
+                    rmZero = true;
+                }
+            }
         }
         string s2;
         for (int i = 0; i < s.length(); i++) {
             char c = s[i];
             if ((c != '-') && (c != '+') )
                 s2.push_back(c);
+            if ((c == '-' || c == '+') && rmZero) {
+                return  "0";
+            }
+            int n = c - '0';
+            if ((n<0)||(n>9))
+                break;
         }
         
         return s2;
