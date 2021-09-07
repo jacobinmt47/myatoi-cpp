@@ -74,11 +74,7 @@ public:;
     }
 
     int myAtoi(string s) {
-        if (s.length() == 0) {
-            return 0;
-        }
-        if (s.length() == 1)
-            return this->toInt(s[0]);
+        s = this->trimFrontSpace(s);
         string arr;
         int numarr[200];
         int nextChar = 0;
@@ -86,36 +82,41 @@ public:;
         if (!(this->isNumber(s[0]) || (s[0] == ' '))) {
             return 0;
         }
-        s = this->trimFrontSpace(s);
-        for (int i = 0; i < s.length(); ++i) {
-            if (s[i] == '.')
-                break;
+        if (s[0] == '-') {
+            isPositive = false;
+        }
+        else {
+            isPositive = true;
+        }
+        for (size_t i = 0; i < s.length(); i++)
+        {
             if (i > 0) {
                 if (s[i] == '+' && s[i - 1] == '-')
                     return 0;
                 if (s[i] == '-' && s[i - 1] == '+')
                     return 0;
-
             }
+        }
+        s = this->delNonNum(s, s.length());
+        if (s.length() == 0) {
+            return 0;
+        }
+        for (int i = 0; i < s.length(); ++i) {
+            if (s[i] == '.')
+                break;
             if (this->isNumber(s[i])) {
                 arr.push_back(s[i]);
                 nextChar++;
             }
             else {
                 if (s[i] == ' ') {
+                    // need to convert to numbers and sum
                     break;
                 }
-                return 0;
+                break;
             }
         }
-        
-        if (arr[0] == '-') {
-            isPositive = false;
-        }
-        else {
-            isPositive = true;
-        }
-        string ret = this->delNonNum(arr, nextChar);
+        string ret = arr;
         long n = ret.length() - 1;
         long powTen = 1;
         if (isMax(ret, isPositive)) {
@@ -170,25 +171,25 @@ public:;
         return ret;
     }
 
-    // remove leading zeros, minus sign, and spaces
+    // remove leading zeros, minus sign
     string delNonNum(string arr, int length) {
         string s;
-        for (int i = 0; i < length; i++) {
-            char c = arr[i];
-            if ((c != '-') && (c != '+') &&(c!=' '))
-                s.push_back(c);
-        }
-        string s2;
-        bool onfront =  false;
-        for (int i = 0; i < s.length(); ++i) {
+        bool onfront = false;
+        for (int i = 0; i <length; ++i) {
             //remove leading zeros
-            if (s[i] != '0'|| onfront) {
+            if (arr[i] != '0' || onfront) {
                 onfront = true;
-                s2.push_back(s[i]);
+                s.push_back(arr[i]);
             }
 
         }
+        string s2;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s[i];
+            if ((c != '-') && (c != '+') )
+                s2.push_back(c);
+        }
+        
         return s2;
     }
-
 };

@@ -6,7 +6,7 @@
 int main()
 {
     Solution s;
-    std::cout << s.myAtoi("00000 - 42a12340") << std::endl;
+    std::cout << s.myAtoi("00000-42a12340") << std::endl;
     std::cout << s.myAtoi(" -123") << std::endl;
     std::cout<<s.myAtoi("9999999999") << std::endl;
     std::cout<<s.myAtoi("4193 with words") << std::endl;
@@ -17,7 +17,7 @@ int main()
     std::cout<<s.myAtoi("-") << std::endl;
     std::cout<<s.myAtoi("+1") << std::endl;
     std::cout<<s.myAtoi("  0000000000012345678") << std::endl; // should be 12345678
-    std::cout<<s.myAtoi("21474836460") << std::endl;
+    std::cout<<s.myAtoi(" -0012a42") << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
